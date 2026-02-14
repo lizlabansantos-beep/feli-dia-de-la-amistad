@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Feliz San Valentín 💙</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&display=swap');
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #89f7fe, #66a6ff);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* efecto brillo suave */
+body::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 10%, transparent 40%);
+  animation: brillo 8s linear infinite;
+}
+
+@keyframes brillo {
+  from { transform: translate(-25%, -25%) rotate(0deg); }
+  to { transform: translate(-25%, -25%) rotate(360deg); }
+}
+
+.card {
+  position: relative;
+  background: #ffffff; /* fondo blanco sólido */
+  border-radius: 25px;
+  padding: 30px;
+  text-align: center;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+h1 { 
+  color: #1d4ed8; 
+  font-weight: 500;
+}
+
+p { 
+  color: #333; 
+  font-size: .9rem;
+}
+
+.imagenes{
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+.persona {
+  text-align: center;
+}    
+
+.imagenes img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  box-shadow: 0 0 20px rgba(59,130,246,0.6);
+  cursor: pointer;
+  transition: .4s;
+}
+
+.imagenes img:hover {
+  transform: scale(1.1) rotate(-3deg);
+}
+
+.nombre {
+  margin-top: 8px;
+  font-weight: 500;
+  color: #1d4ed8;
+}
+
+.secreto {
+  margin-top: 10px;
+  font-size: .85rem;
+  background: rgba(255,255,255,0.5);
+  border-radius: 15px;
+  padding: 10px;
+  display: none;
+  animation: aparecerMensaje .5s ease;
+}
+
+@keyframes aparecerMensaje {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+button {
+  margin-top: 18px;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(45deg, #1d4ed8, #3b82f6);
+  color: white;
+  font-size: .9rem;
+  cursor: pointer;
+  transition: .3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(59,130,246,0.5);
+}
+
+.mensajeFinal {
+  margin-top: 15px;
+  font-weight: 500;
+  color: #333;
+  display: none;
+}
+
+.corazon {
+  position: absolute;
+  font-size: 22px;
+  animation: flotar 6s linear infinite;
+}
+
+@keyframes flotar {
+  from { transform: translateY(100vh); opacity: 1; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="musica" loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card">
+  <h1>💙Feliz San Valentin💙</h1>
+  <p>Toca la foto para ver el mensaje secreto ✨</p>
+
+  <div class="imagenes">
+    <div class="persona">
+      <img src="foto.png" onclick="mostrarSecreto('s1')">
+      <div class="nombre">Amigo 💙</div>
+      <div class="secreto" id="s1">
+        Feliz Día del Amor y la Amistad 💙  
+         
+        Más que un compañero de trabajo, fuiste
+        un gran amigo. Gracias por las risas, el
+         apoyo y los buenos momentos. Aunque los
+          caminos laborales cambien, la amistad sigue. 
+        Siempre voy a valorar la amistad que me brindaste.🙃😊
+        
+      </div>
+    </div>
+  </div>
+
+  <button onclick="final()">💙 Presiona aquí 💙</button>
+
+  <div class="mensajeFinal" id="final">
+      Gracias por tu apoyo, tu paciencia,
+      tu lealtad, por todo el aprecio que 
+      tuviste conmigo y tambien por demostrarme que en 
+      este mundo no hay personas en las que se puede confiar🫶
+       Eres una amistad que siempre voy a recordar . 💙✨
+       
+    "DIOS TE BENDIGA A TI Y A TU FAMILIA, MUCHAS BENDICIONES🙏🙌"
+  </div>
+</div>
+
+<script>
+function mostrarSecreto(id) {
+  const msg = document.getElementById(id);
+  msg.style.display = msg.style.display === "block" ? "none" : "block";
+}
+
+function final() {
+  const msg = document.getElementById("final");
+  msg.style.display = msg.style.display === "block" ? "none" : "block";
+
+  document.getElementById("musica").play();
+
+  for (let i = 0; i < 25; i++) {
+    let corazon = document.createElement("div");
+    corazon.className = "corazon";
+    corazon.innerHTML = "💙";
+    corazon.style.left = Math.random() * 100 + "vw";
+    corazon.style.animationDuration = (Math.random() * 3 + 3) + "s";
+    document.body.appendChild(corazon);
+
+    setTimeout(() => corazon.remove(), 6000);
+  }
+}
+</script>
+
+</body>
+</html>
